@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Housinnovation - Sélection Commercial</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container" style="text-align: center;">
+    <h1>Sélectionnez le commercial</h1>
+    <form action="/select" method="post">
+      <% Object.keys(salesReps).forEach(function(key) { %>
+        <button class="button" type="submit" name="rep" value="<%= key %>">
+          <%= salesReps[key].name %>
+        </button>
+      <% }); %>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Devis Housinnovation</title>
+  <style>
+    @page { size: A4; margin: 5mm; }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background: #fff;
+    }
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      padding: 10px;
+    }
+    header {
+      text-align: center;
+      border-bottom: 2px solid #0E8484;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+    header img {
+      max-height: 70px;
+    }
+    header h1 {
+      margin: 0;
+      color: #0E8484;
+      font-size: 24px;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+    .section {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+    .section h2 {
+      background: #0E8484;
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 16px;
+      margin: 0;
+    }
+    .info {
+      padding: 5px 10px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    tr.total th, tr.total td {
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      font-size: 11px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://i.imgur.com/MsCuFY2.png" alt="Logo Housinnovation">
+      <h1>Housinnovation</h1>
+      <p>Devis Express - <%= quote.date %></p>
+      <p><strong>Numéro du devis : <%= quote.quoteNumber %></strong></p>
+    </header>
+    
+    <div class="section">
+      <h2>Informations Commercial</h2>
+      <div class="info">
+        <strong><%= quote.salesRep.name %></strong><br>
+        Email : <%= quote.salesRep.email %><br>
+        Téléphone : <%= quote.salesRep.phone %>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Informations Client</h2>
+      <div class="info">
+        Nom : <%= quote.client.name %><br>
+        Email : <%= quote.client.email %><br>
+        Téléphone : <%= quote.client.phone %><br>
+        Adresse : <%= quote.client.address %>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2>Détails du Projet</h2>
+      <table>
+        <tr>
+          <th>Type de Maison</th>
+          <td><%= quote.project.type %></td>
+        </tr>
+        <tr>
+          <th>Surface (m²)</th>
+          <td><%= quote.project.surface %></td>
+        </tr>
+        <tr>
+          <th>Hauteur sous plafond (m)</th>
+          <td><%= quote.project.ceilingHeight %></td>
+        </tr>
+        <tr>
+          <th>Fondation en béton armé</th>
+          <td><%= (quote.project.foundation === "oui") ? "Oui" : "Non" %></td>
+        </tr>
+        <tr>
+          <th>Revêtement du toit</th>
+          <td><%= quote.project.roofCovering.charAt(0).toUpperCase() + quote.project.roofCovering.slice(1) %></td>
+        </tr>
+        <tr>
+          <th>Revêtement extérieur</th>
+          <td><%= quote.project.exteriorFinish.charAt(0).toUpperCase() + quote.project.exteriorFinish.slice(1) %></td>
+        </tr>
+        <tr>
+          <th>Isolation complète</th>
+          <td><%= (quote.project.isolation === "oui") ? "Oui" : "Non" %></td>
+        </tr>
+        <tr>
+          <th>Revêtement intérieur</th>
+          <td><%= quote.project.interiorFinish.charAt(0).toUpperCase() + quote.project.interiorFinish.slice(1) %></td>
+        </tr>
+        <tr>
+          <th>Electricité et plomberie</th>
+          <td><%= (quote.project.electricity === "oui") ? "Oui" : "Non" %></td>
+        </tr>
+        <tr>
+          <th>Aluminium</th>
+          <td><%= (quote.project.aluminium === "oui") ? "Oui" : "Non" %></td>
+        </tr>
+        <tr>
+          <th>Céramique</th>
+          <td><%= (quote.project.ceramique === "oui") ? "Oui" : "Non" %></td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="section">
+      <h2>Récapitulatif des Coûts</h2>
+      <table>
+        <tr>
+          <th>Coût Fondation</th>
+          <td>MUR <%= quote.project.foundationCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût de la structure (acier)</th>
+          <td>MUR <%= quote.project.structureCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût Revêtement du toit</th>
+          <td>MUR <%= quote.project.roofCoveringCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût finition extérieure</th>
+          <td>MUR <%= quote.project.exteriorCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût Isolation complète</th>
+          <td>MUR <%= quote.project.isolationCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût finition intérieure</th>
+          <td>MUR <%= quote.project.interiorCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût Electricité et plomberie</th>
+          <td>MUR <%= quote.project.electricityCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût Aluminium</th>
+          <td>MUR <%= quote.project.aluminiumCost.toFixed(2) %></td>
+        </tr>
+        <tr>
+          <th>Coût Céramique</th>
+          <td>MUR <%= quote.project.ceramiqueCost.toFixed(2) %></td>
+        <tr class="total">
+          <th>Total</th>
+          <td>MUR <%= quote.project.basePrice.toFixed(2) %></td>
+        </tr>
+      </table>
+    </div>
+    
+    <footer>
+      <p><strong>maison opperationnelle en approximativement 30jours</strong></p>
+      <p>Le présent devis est établi à titre indicatif et est susceptible d'être révisé après validation des plans par notre ingénieur.</p>
+    </footer>
+  </div>
+</body>
+</html>

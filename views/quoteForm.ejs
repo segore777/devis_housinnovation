@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Création du Devis - Housinnovation</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Création du Devis</h1>
+    <p>Commercial assigné : <strong><%= salesRep.name %></strong></p>
+
+    <form action="/quote" method="post">
+      <h2>Informations Client</h2>
+      <label>Nom du Client</label>
+      <input type="text" name="clientName" required>
+      
+      <label>Email du Client</label>
+      <input type="email" name="clientEmail" required>
+      
+      <label>Téléphone du Client</label>
+      <input type="text" name="clientPhone" required>
+      
+      <label>Adresse du Client (optionnel)</label>
+      <input type="text" name="clientAddress">
+      
+      <h2>Détails du Projet</h2>
+      <label>Type de Maison</label>
+      <select name="projectType">
+        <option value="Maison plein-pied">Maison plein-pied</option>
+        <option value="Maison à étages">Maison à étages</option>
+      </select>
+
+      <label>Fondation en béton armé</label>
+      <select name="foundation" required>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      
+      <label>Surface du bâtiment (m²)</label>
+      <input type="number" name="surface" step="0.1" required>
+      
+      <label>Hauteur sous plafond (m)</label>
+      <input type="number" name="ceilingHeight" step="0.1" required>
+      
+      <label>Revêtement du toit</label>
+      <select name="roofCovering" required>
+        <option value="waterproof">MGO + Waterproofing (gris)</option>
+        <option value="ondulées">MGO + Waterproofing + Tôles ondulées</option>
+        <option value="wallofChina">MGO + Waterproofing + Tôles "Wall of China" isolées</option>
+      </select>
+      
+      <label>Revêtement extérieur</label>
+      <select name="exteriorFinish" required>
+        <option value="mgo">MGO (gris)</option>
+        <option value="crépi">MGO + Crépissage</option>
+        <option value="finishBoard">MGO + Finish Board au choix</option>
+      </select>
+      
+      <label>Isolation complète</label>
+      <select name="isolation" required>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      
+      <label>Revêtement intérieur</label>
+      <select name="interiorFinish" required>
+        <option value="gypsumBoard">Gypsum Board + peinture</option>
+        <option value="aucun">Aucun</option>
+      </select>
+
+      <label>Electricité et plomberie</label>
+      <select name="electricity" required>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+
+      <label>Aluminium</label>
+      <select name="aluminium" required>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+  
+      <label>Céramique</label>
+      <select name="ceramique" required>
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+      
+      <button type="submit">Générer le Devis</button>
+    </form>
+  </div>
+</body>
+</html>
